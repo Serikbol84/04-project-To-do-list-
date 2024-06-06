@@ -1,11 +1,11 @@
-import Header from "./Components/Header";
+import Name from "./Components/Name";
 
 
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <Name/>
     </div>
   );
 }
