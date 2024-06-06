@@ -17,6 +17,7 @@
     border-radius: 100px;
     border: none;
     background-color: rgba(227, 227, 227, 1);
+    cursor: pointer;
 }
 
 .plus {
