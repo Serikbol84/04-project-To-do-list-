@@ -1,11 +1,11 @@
-import Name from "./Components/Name";
+import Title from "./Components/Title";
 
 
 
 function App() {
   return (
     <div className="App">
-      <Name/>
+      <Title/>
     </div>
   );
 }

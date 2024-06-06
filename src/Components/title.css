@@ -1,9 +1,13 @@
 .title {
     margin-top: 100px;
+    margin-bottom: 90px;
+}
+
+.titleText {
     width: 630px;
 }
 
-.title h1{
+.titleText h1{
     margin: 0;
     margin-bottom: 24px;
     font-size: 34px;
@@ -11,7 +15,7 @@
     line-height: 38px;
 }
 
-.title p{
+.titleText p{
     margin: 0;
     font-size: 16px;
     font-weight: 500;
