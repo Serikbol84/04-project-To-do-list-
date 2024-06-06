@@ -1,3 +1,4 @@
+import Footer from "./Components/Footer/Footer";
 import Pager from "./Components/Pager/Pager";
 import Title from "./Components/Title/Title";
 
@@ -6,8 +7,9 @@ import Title from "./Components/Title/Title";
 function App() {
   return (
     <div className="App">
-      <Title/>
+      <Title />
       <Pager />
+      <Footer />
     </div>
   );
 }
