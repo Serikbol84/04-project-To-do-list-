@@ -1,14 +1,14 @@
 import Footer from "./Components/Footer/Footer";
-import Pager from "./Components/Pager/Pager";
-import Title from "./Components/Title/Title";
+import Header from "./Components/Header/Header";
+import Main from './Components/Main/Main';
 
 
 
 function App() {
   return (
     <div className="App">
-      <Title />
-      <Pager />
+      <Header />
+      <Main />
       <Footer />
     </div>
   );

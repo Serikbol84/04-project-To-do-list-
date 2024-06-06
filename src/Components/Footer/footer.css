@@ -1,6 +1,7 @@
 .footerMenu {
     height: 102px;
     display: flex;
+    width: 100%;
     justify-content: space-between;
     align-items: center;
 
@@ -17,3 +18,4 @@
     margin-left: 4px;
     color: darkgray;
 }
+
