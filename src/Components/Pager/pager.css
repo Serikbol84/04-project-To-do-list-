@@ -1,0 +1,56 @@
+.pagerLine {
+    width: 289px;
+    height: 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    width: 87px;
+    height: 40px;
+
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 500;
+
+    border-radius: 100px;
+    border: none;
+    background-color: rgba(227, 227, 227, 1);
+}
+
+.plus {
+    position: absolute;
+    right: 80px;
+    top: 274px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background:  rgba(6, 1, 50, 0.893);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.plus::before, .plus::after {
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.plus::before {
+    width: 22px;
+    height: 4px;
+}
+
+.plus::after {
+    width: 4px;
+    height: 22px;
+}
+
+.plus:active {
+    background: rgba(10, 4, 80, 0.89);
+}
