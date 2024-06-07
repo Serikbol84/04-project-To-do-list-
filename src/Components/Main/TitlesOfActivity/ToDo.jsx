@@ -1,4 +1,5 @@
-import './toDo.css'
+import './titles.css'
+import ToDoItemList from '../ItemList/ToDoItemList'
 
 const ToDo = () => {
     return (
@@ -11,6 +12,7 @@ const ToDo = () => {
                     <span className='divider'></span>
                 </div>
             </div>
+            <ToDoItemList />
         </section>
     );
 }

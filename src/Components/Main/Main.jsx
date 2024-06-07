@@ -1,6 +1,7 @@
-import ToDoItemList from './ItemList/ToDoItemList';
 import Pager from './Pager/Pager';
-import ToDo from './ToDo/ToDo';
+import Done from './TitlesOfActivity/Done';
+import ToDo from './TitlesOfActivity/ToDo';
+import Trash from './TitlesOfActivity/Trash';
 import './main.css';
 
 const Main = () => {
@@ -8,9 +9,9 @@ const Main = () => {
         <div className="Main">
             <Pager />
             <ToDo />
-            <ToDoItemList />
+            <Done />
+            <Trash />
         </div>
-        
     );
 }
  

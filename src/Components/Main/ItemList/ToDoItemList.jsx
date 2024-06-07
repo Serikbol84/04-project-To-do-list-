@@ -15,6 +15,33 @@ const ToDoItemList = () => {
                         <input type="checkbox" className="checkbox" />
                         <input type="text" value='' className='inputRead' />
                     </div>
+                    <div className="actions">
+                        <div className="dots">
+                            <span className='dot'></span>
+                            <span className='dot'></span>
+                            <span className='dot'></span>
+                        </div>
+                        <input type="checkbox" className="checkbox" />
+                        <input type="text" value='' className='inputRead' />
+                    </div>
+                    <div className="actions">
+                        <div className="dots">
+                            <span className='dot'></span>
+                            <span className='dot'></span>
+                            <span className='dot'></span>
+                        </div>
+                        <input type="checkbox" className="checkbox" />
+                        <input type="text" value='' className='inputRead' />
+                    </div>
+                    <div className="actions">
+                        <div className="dots">
+                            <span className='dot'></span>
+                            <span className='dot'></span>
+                            <span className='dot'></span>
+                        </div>
+                        <input type="checkbox" className="checkbox" />
+                        <input type="text" value='' className='inputRead' />
+                    </div>
                 </div>
                 
                 <div className="moveToTrash">
