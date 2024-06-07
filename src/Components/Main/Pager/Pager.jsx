@@ -2,6 +2,7 @@ import Done from '../TitlesOfActivity/Done';
 import ToDo from '../TitlesOfActivity/ToDo';
 import Trash from '../TitlesOfActivity/Trash';
 import './pager.css';
+import './inputTask.css'
 import { useState } from 'react';
 
 const Pager = () => {
@@ -51,11 +52,23 @@ const Pager = () => {
                     <button className='plus'></button>
                 </div>
 
+                <div className="inputTask">
+                    <div className="inputTaskWrapper">
+                        <h1>Add New To Do</h1>
+                        <textarea type="text" className='tasks' placeholder="Your text" />
+                        <button className="add">
+                            <span>Add</span>
+                        </button>
+                    </div>
+                </div>
+
                 <div>
                 {renderContent()}
                 </div>
 
             </div>
+
+            {/* <InputTask /> */}
         </section>
     );
 }
