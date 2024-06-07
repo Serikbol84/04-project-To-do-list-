@@ -1,14 +1,14 @@
-import ItemList from './ItemList/ItemList';
+import ToDoItemList from './ItemList/ToDoItemList';
 import Pager from './Pager/Pager';
-import ToDos from './ToDos/ToDo';
+import ToDo from './ToDo/ToDo';
 import './main.css';
 
 const Main = () => {
     return (
         <div className="Main">
             <Pager />
-            <ToDos />
-            <ItemList />
+            <ToDo />
+            <ToDoItemList />
         </div>
         
     );
