@@ -25,24 +25,24 @@ const Pager = () => {
                 <div className="pagerLine">
 
                     <button className="btn"
-                        style={{backgroundColor: activeTab === "TODO" ? "rgba(8, 30, 52, 0.42)" : "rgba(227, 227, 227, 1)",
-                                color: activeTab === "TODO" ? "white" : "black"}}
+                        style={{backgroundColor: activeTab === "TODO" && "rgba(8, 30, 52, 0.42)",
+                                color: activeTab === "TODO" && "white"}}
                                 onClick={() => setActiveTab ("TODO")}>
                         <span>To Do</span>
                     </button>
 
                     <button className="btn" 
-                        style={{backgroundColor: activeTab === "DONE" ? "rgba(8, 30, 52, 0.42)" : "rgba(227, 227, 227, 1)",
-                                color: activeTab === "DONE" ? "white" : "black"}}
+                        style={{backgroundColor: activeTab === "DONE" && "rgba(8, 30, 52, 0.42)",
+                                color: activeTab === "DONE" && "white"}}
                                 onClick={() => setActiveTab ("DONE")}>
                         <span>Done</span>
                     </button>
 
                     <button className="btn" 
-                        style={{backgroundColor: activeTab === "TRASH" ? "rgba(8, 30, 52, 0.42)" : "rgba(227, 227, 227, 1)",
-                                color: activeTab === "TRASH" ? "white" : "black"}}
+                        style={{backgroundColor: activeTab === "TRASH" && "rgba(8, 30, 52, 0.42)",
+                                color: activeTab === "TRASH" && "white"}}
                                 onClick={() => setActiveTab ("TRASH")}>
-                        <span>Trash</span>
+                            <span>Trash</span>
                     </button>
 
                 </div>
@@ -54,7 +54,7 @@ const Pager = () => {
                 <div>
                 {renderContent()}
                 </div>
-                
+
             </div>
         </section>
     );
