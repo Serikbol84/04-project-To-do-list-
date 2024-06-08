@@ -1,7 +1,15 @@
 import './itemList.css'
 import Trash from '../../../icons/trash.svg'
+import { useState, useEffect } from 'react';
 
 const ToDoItemList = () => {
+
+
+    // useEffect(() => {
+    //     const textFromStorage = localStorage.getItem('inputTextArea')
+    //     setToDoText(textFromStorage)
+    // })
+
     return (
         <section className="itemList">
             <div className="container">

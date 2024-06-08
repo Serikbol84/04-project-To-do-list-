@@ -3,10 +3,13 @@ import ToDo from '../TitlesOfActivity/ToDo';
 import Trash from '../TitlesOfActivity/Trash';
 import './pager.css';
 import './inputTask.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Pager = () => {
-    const [activeTab, setActiveTab] = useState ("TODO")
+    const [activeTab, setActiveTab] = useState ("TODO");
+    const [isMenuVisible, setMenuVisible] = useState (false);
+    const [toDoText, setToDoText] = useState ('');
+    
     const renderContent = () => {
         switch (activeTab) {
             case 'TODO':
@@ -19,6 +22,19 @@ const Pager = () => {
                 return null;
         }
     };
+
+    function handleTextChnge(e) {
+        setToDoText(e.target.value)
+    }
+
+    function add() {
+        localStorage.setItem('inputTextArea', toDoText)
+    }
+
+    // useEffect(() => {
+    //     const textFromStorage = localStorage.getItem('inputTextArea')
+    //     setToDoText(textFromStorage)
+    // })
 
     return (
         <section className="pager">
@@ -49,26 +65,28 @@ const Pager = () => {
                 </div>
 
                 <div className="addToDos">
-                    <button className='plus'></button>
+                    <button className='plus' onClick={() => setMenuVisible (!isMenuVisible)}></button>
                 </div>
 
+                {isMenuVisible && (
                 <div className="inputTask">
                     <div className="inputTaskWrapper">
                         <h1>Add New To Do</h1>
-                        <textarea type="text" className='tasks' placeholder="Your text" />
-                        <button className="add">
+                        <textarea type="text" className='tasks' placeholder="Your text" value={toDoText} onChange={handleTextChnge}/>
+                        <button className="add" onClick={add}>
                             <span>Add</span>
                         </button>
                     </div>
                 </div>
+                )}
 
                 <div>
                 {renderContent()}
                 </div>
 
-            </div>
+                
 
-            {/* <InputTask /> */}
+            </div>
         </section>
     );
 }
