@@ -1,8 +1,7 @@
-import Done from '../TitlesOfActivity/Done';
-import ToDo from '../TitlesOfActivity/ToDo';
-import Trash from '../TitlesOfActivity/Trash';
 import './pager.css';
 import './inputTask.css'
+import Trash from '../../../icons/trash.svg'
+import Library from '../../../icons/library.svg'
 import { useState, useEffect } from 'react';
 
 const Pager = () => {
@@ -10,20 +9,123 @@ const Pager = () => {
     const [isMenuVisible, setMenuVisible] = useState (false);
     const [toDoText, setToDoText] = useState ('');
     
+    useEffect(() => {
+        const textFromStorage = localStorage.getItem('inputTextArea')
+        if (textFromStorage) {
+            setToDoText(textFromStorage)
+        } 
+    }, [])
+
     const renderContent = () => {
         switch (activeTab) {
             case 'TODO':
-                return <ToDo />;
+                return (
+                    <section className="toDo"> 
+                        <div className="container">
+                            <div className="toDoTile">
+                                <h1>To Do</h1>
+                            </div>
+                            <div className="divider">
+                                <span className='divider'></span>
+                            </div>
+                        </div>
+
+                        <section className="itemList">
+                            <div className="container">
+                                <div className="wrapper">
+                                    <div className="actions">
+                                        <div className="dots">
+                                            <span className='dot'></span>
+                                            <span className='dot'></span>
+                                            <span className='dot'></span>
+                                        </div>
+                                        <input type="checkbox" className="checkbox" />
+                                        <input type="text" className='inputRead'/>
+                                    </div>
+                                </div>
+                                
+                                <div className="moveToTrash">
+                                    <img src={Trash} alt="" />
+                                    <p>Move to Trash</p>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                )
             case 'DONE':
-                return <Done />;
+                return (
+                    <section className="done"> 
+                        <div className="container">
+                            <div className="doneTile">
+                                <h1>Done</h1>
+                            </div>
+                            <div className="divider">
+                                <span className='divider'></span>
+                            </div>
+                        </div>
+
+                        <section className="itemList">
+                            <div className="container">
+                                <div className="wrapper">
+                                    <div className="actions">
+                                        <div className="dots">
+                                            <span className='dot'></span>
+                                            <span className='dot'></span>
+                                            <span className='dot'></span>
+                                        </div>
+                                        <input type="checkbox" className="checkbox" />
+                                        <input type="text" value='' className='inputRead' />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                )
             case 'TRASH':
-                return <Trash />;
+                return (
+                    <section className="trash"> 
+                        <div className="container">
+                            <div className="trashTile">
+                                <h1>Trash</h1>
+                            </div>
+                            <div className="divider">
+                                <span className='divider'></span>
+                            </div>
+                        </div>
+                        <section className="itemList">
+                            <div className="container">
+                                <div className="wrapper">
+                                    <div className="actions">
+                                        <div className="dots">
+                                            <span className='dot'></span>
+                                            <span className='dot'></span>
+                                            <span className='dot'></span>
+                                        </div>
+                                        <input type="checkbox" className="checkbox" />
+                                        <input type="text" value='' className='inputRead' />
+                                    </div>
+                                </div>
+                                
+                                <div className="trashMenu">
+                                    <div className="delete">
+                                        <img src={Trash} alt="" />
+                                        <p>Delete Forever</p>
+                                    </div>
+                                    <div className="moveBack">
+                                        <img src={Library} alt="" />
+                                        <p>Move Back To To Do</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                )
             default:
                 return null;
         }
     };
 
-    function handleTextChnge(e) {
+    function handleTextChange(e) {
         setToDoText(e.target.value)
     }
 
@@ -31,10 +133,6 @@ const Pager = () => {
         localStorage.setItem('inputTextArea', toDoText)
     }
 
-    // useEffect(() => {
-    //     const textFromStorage = localStorage.getItem('inputTextArea')
-    //     setToDoText(textFromStorage)
-    // })
 
     return (
         <section className="pager">
@@ -72,7 +170,7 @@ const Pager = () => {
                 <div className="inputTask">
                     <div className="inputTaskWrapper">
                         <h1>Add New To Do</h1>
-                        <textarea type="text" className='tasks' placeholder="Your text" value={toDoText} onChange={handleTextChnge}/>
+                        <textarea type="text" className='tasks' placeholder="Your text" value={toDoText} onChange={handleTextChange}/>
                         <button className="add" onClick={add}>
                             <span>Add</span>
                         </button>
@@ -83,8 +181,6 @@ const Pager = () => {
                 <div>
                 {renderContent()}
                 </div>
-
-                
 
             </div>
         </section>
