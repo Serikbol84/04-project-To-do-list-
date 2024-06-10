@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
 
 .btn {
@@ -69,14 +70,14 @@
     margin: 0;
 }
 
-.toDoTile h1 {
+.title h1 {
     margin: 64px 0 26px 0;
     font-size: 24px;
     font-weight: 700;
     line-height: 28px;
 }
 
-.doneTile h1 {
+/* .doneTile h1 {
     margin: 64px 0 26px 0;
     font-size: 24px;
     font-weight: 700;
@@ -88,7 +89,7 @@
     font-size: 24px;
     font-weight: 700;
     line-height: 28px;
-}
+} */
 
 .divider span:after {
     content: '';
@@ -111,7 +112,7 @@
 }
 
 .actions:last-child {
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
 }
 
 .dots {
@@ -170,9 +171,9 @@
     line-height: 22px;
 }
 
-/* .inputRead:focus {
+.inputRead:focus {
     background-color: rgba(228, 230, 231, 1);
-} */
+}
 
 .actions:focus-within {
     background-color: rgba(228, 230, 231, 1);
@@ -190,9 +191,11 @@
     line-height: 18px;
 
     border-radius: 12px;
+    border: none;
     background: rgba(228, 230, 231, 1);
 
     box-shadow: 0 3px 4px 0.1em rgba(0, 0, 0, 0.16);
+    cursor: pointer;
 }
 
 .moveToTrash img {
@@ -201,8 +204,9 @@
 
 .trashMenu {
     margin-top: 6px;
+    padding: 12px 0 12px 0;
     width: 240px;
-    height: 82px;
+    /* height: 82px; */
     display: flex;
     flex-direction: column;
     /* align-items: center; */
@@ -222,16 +226,22 @@
 }
 
 .delete{
-    margin-top: 12px;
+    /* padding: 12px 0 12px 0; */
     height: 24px;
     display: flex;
     align-items: center;
+    border: none;
+    cursor: pointer;
+    background: none;
 }
 
 .moveBack {
     margin-top: 10px;
     display: flex;
     align-items: center;
+    border: none;
+    cursor: pointer;
+    background: none;
 }
 
 .delete img {
@@ -240,4 +250,18 @@
 
 .moveBack img {
     margin: 0 12px 0 4px;
+}
+
+.items {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.item {
+    display: flex;
+    width: 100%;
 }
