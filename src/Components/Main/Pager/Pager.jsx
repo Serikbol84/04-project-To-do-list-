@@ -133,8 +133,8 @@ const Pager = () => {
                                                         <span className='dot'></span>
                                                         <span className='dot'></span>
                                                     </div>
-                                                    <input type="checkbox" checked={false} className="checkbox" />
-                                                    <input type="text" value={child.item} className='inputRead' />
+                                                    <input type="checkbox" checked={child.checked} className="checkbox" onChange={() => handleCheck(toDo.id, child.id)}/>
+                                                    <input type="text" value={child.item} className={`inputRead ${child.checked && 'textThrought'}`} />
                                                 </div>
                                             </div>
                                         </div>
@@ -173,9 +173,9 @@ const Pager = () => {
                 )
 
             }
-           
+            return '';
         })
-
+        
     };
 
     // useEffect(() => {
@@ -190,8 +190,43 @@ const Pager = () => {
     }
 
     function add() {
-        localStorage.setItem('inputTextArea', toDoText)
+        const updateToDos = toDos.map(toDo => {
+            if (toDo.name === 'TODO') {
+                return {
+                    ...toDo,
+                    children: [
+                        ...toDo.children,
+                        { id: Date.now(), checked: false, item: toDoText }
+                    ]
+                }
+            }
+            return toDo;
+        })
+        setToDos(updateToDos);
+        setToDoText('');
     }
+
+    // const handleCheck = (id) => {
+        
+    // }
+
+   const handleCheck = (parentId, childId) => {
+        const updateToDos = toDos.map(toDo => {
+            if (toDo.id === parentId) {
+                return {
+                    ...toDo,
+                    children: toDo.children.map(child => {
+                        if(child.id === childId) {
+                            return { ...child, checked: !child.checked}
+                        }
+                        return child;
+                    })
+                }
+            }
+            return toDo;
+        })
+        setToDos(updateToDos);
+   }
 
 
     return (
@@ -225,7 +260,7 @@ const Pager = () => {
                 <div className="inputTask">
                     <div className="inputTaskWrapper">
                         <h1>Add New To Do</h1>
-                        <textarea type="text" className='tasks' placeholder="Your text" value={toDoText} />
+                        <textarea type="text" className='tasks' placeholder="Your text" value={toDoText} onChange={handleTextChange}/>
                         <button className="add" onClick={add}>
                             <span>Add</span>
                         </button>
