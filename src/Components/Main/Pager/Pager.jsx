@@ -10,47 +10,13 @@ const Pager = () => {
     const [activeTab, setActiveTab] = useState ("TODO");
     const [isMenuVisible, setMenuVisible] = useState (false);
     const [toDoText, setToDoText] = useState ('');
-    const [items, setItems] = useState ([
-        // {
-        //     id: 1,
-        //     checked: false,
-        //     item: 'Write Essay',
-        //     onlyTrash: false,
-        //     toDoDone: true
-        // },
-        // {
-        //     id: 2,
-        //     checked: false,
-        //     item: 'One Hour CSS Course Online',
-        //     onlyTrash: false,
-        //     toDoDone: true
-        // },
-        // {
-        //     id: 3,
-        //     checked: false,
-        //     item: 'Buy One Way Tickets to San Fransico',
-        //     onlyTrash: false,
-        //     toDoDone: true
-        // },
-        // {
-        //     id: 4,
-        //     checked: false,
-        //     item: 'Go to Gym',
-        //     onlyTrash: false,
-        //     toDoDone: true
-        // },
-        // {
-        //     id: 5,
-        //     checked: false,
-        //     item: 'Buy Groceries',
-        //     onlyTrash: false,
-        //     toDoDone: true
-        // }
-    ])
+    const [items, setItems] = useState(JSON.parse(localStorage.getItem('todolist')) || []);
+
     console.log(items);
-    const filterToDos = items.filter(item => item.toDoDone === true )
-    const filterDones = items.filter(item => item.toDoDone === true && item.checked === true )
-    const filterTrashes = items.filter(item => item.onlyTrash === true)
+
+    const filterToDos = items.filter(item => item.toDoDone === true );
+    const filterDones = items.filter(item => item.toDoDone === true && item.checked === true );
+    const filterTrashes = items.filter(item => item.onlyTrash === true);
     
     const renderContent = () => {
         switch (activeTab) {
@@ -186,12 +152,7 @@ const Pager = () => {
         }
     };
 
-    // useEffect(() => {
-    //     const textFromStorage = localStorage.getItem('inputTextArea')
-    //     if (textFromStorage) {
-    //         setToDoText(textFromStorage)
-    //     } 
-    // }, [])
+    
 
     function handleTextChange(e) {
         setToDoText(e.target.value)
@@ -199,23 +160,27 @@ const Pager = () => {
 
     const add = () => {
         const newItem = { id: Date.now(), checked: false, item: toDoText, onlyTrash: false, toDoDone: true }
-        setItems([...items, newItem]);
+        const updateItems = [...items, newItem];
+        setItems(updateItems)
         setToDoText('');
+        localStorage.setItem('todolist', JSON.stringify(updateItems))
     }
 
     const handleCheck = (id) => {
         console.log(`key ${ id }`)
         const listItems = items.map(item => item.id === id ? { ...item, checked: !item.checked } : item)
         setItems(listItems)
+        localStorage.setItem('todolist', JSON.stringify(listItems))
     }
 
     const moveToTrash = () => {
         const checkedItems = items.filter(item => item.checked);
     
-        const updatedItems = items.map(item =>
+        const updateItems = items.map(item =>
             checkedItems.find(checkedItem => checkedItem.id === item.id) ? { ...item, onlyTrash: true, toDoDone: false, checked: false } : item
         );
-        setItems(updatedItems);
+        setItems(updateItems);
+        localStorage.setItem('todolist', JSON.stringify(updateItems))
     }
 
     const moveBackToToDo = () => {
