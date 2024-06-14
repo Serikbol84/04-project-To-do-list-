@@ -155,7 +155,7 @@ const Pager = () => {
                                                         type="checkbox" 
                                                         className="checkbox" 
                                                         checked={filterTrash.checked} 
-                                                        onChange={ () => handleCheck(filterTrash.id) }
+                                                        onChange={ () => handleCheckTrash(filterTrash.id) }
                                                     />
 
                                                     <input 
@@ -222,6 +222,14 @@ const Pager = () => {
         localStorage.setItem('todolist', JSON.stringify(listItems))
     }
 
+    const handleCheckTrash = (id) => {
+        
+        const listItems = items.map(item => item.id === id ? { ...item, checked: !item.checked } : item)
+        setItems(listItems)
+      
+        localStorage.setItem('todolist', JSON.stringify(listItems))
+    }
+
     const moveToTrash = () => {
         const checkedItems = items.filter(item => item.checked);
         const updateItemsOfTrash = items.map(item =>
@@ -242,16 +250,16 @@ const Pager = () => {
     const moveBackToToDo = () => {
         const checkedItems = items.filter(item => item.checked);
         const updatedItems = items.map(item =>
-            checkedItems.find(checkedItem => checkedItem.id === item.id) 
+            checkedItems.find(checkedItem => checkedItem.id === item.id)
             ? {
                 ...item, 
-                checked: false, 
                 onlyTrash: false, 
                 toDoDone: true
             } : item
         )
 
         setItems(updatedItems);
+        localStorage.setItem('todolist', JSON.stringify(updatedItems))
     }
 
     const deleteForever = () => {
