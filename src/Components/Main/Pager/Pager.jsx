@@ -4,18 +4,20 @@ import './pager.css';
 import './inputTask.css'
 import Trash from '../../../icons/trash.svg'
 import Library from '../../../icons/library.svg'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const Pager = () => {
     const [activeTab, setActiveTab] = useState ("TODO");
     const [isMenuVisible, setMenuVisible] = useState (false);
     const [toDoText, setToDoText] = useState ('');
     const [items, setItems] = useState(JSON.parse(localStorage.getItem('todolist')) || []);
+    
 
     console.log(items);
 
-    const filterToDos = items.filter(item => item.toDoDone === true );
-    const filterDones = items.filter(item => item.toDoDone === true && item.checked === true );
+    const filterToDos = items.filter(item => item.toDoDone === true);
+    const filterDones = items.filter(item => item.toDoDone === true && item.checked === true);
     const filterTrashes = items.filter(item => item.onlyTrash === true);
     
     const renderContent = () => {
@@ -44,8 +46,20 @@ const Pager = () => {
                                                         <span className='dot'></span>
                                                         <span className='dot'></span>
                                                     </div>
-                                                    <input type="checkbox" checked={filterToDo.checked} className="checkbox" onChange={ () => handleCheck(filterToDo.id) }/>
-                                                    <input type="text" value={filterToDo.item} className={`inputRead ${filterToDo.checked && 'textThrought'}`} />
+
+                                                    <input 
+                                                        type="checkbox" 
+                                                        checked={filterToDo.checked} 
+                                                        className="checkbox" 
+                                                        onChange={ () => handleCheck(filterToDo.id) }
+                                                    />
+
+                                                    <input 
+                                                        type="text" 
+                                                        value={filterToDo.item} 
+                                                        className={`inputRead ${filterToDo.checked && 'textThrought'}`} 
+                                                    />
+
                                                 </div>  
                                             </div>
                                         </section>
@@ -88,8 +102,20 @@ const Pager = () => {
                                                         <span className='dot'></span>
                                                         <span className='dot'></span>
                                                     </div>
-                                                    <input type="checkbox" className="checkbox" checked={filterDone.checked} onChange={ () => handleCheck(filterDone.id) }/>
-                                                    <input type="text" value={filterDone.item} className={`inputRead ${filterDone.checked && 'textThrought'}`} />
+
+                                                    <input 
+                                                        type="checkbox" 
+                                                        className="checkbox" 
+                                                        checked={filterDone.checked} 
+                                                        onChange={ () => handleCheck(filterDone.id) }
+                                                    />
+
+                                                    <input 
+                                                        type="text" 
+                                                        value={filterDone.item} 
+                                                        className={`inputRead ${filterDone.checked && 'textThrought'}`} 
+                                                    />
+
                                                 </div>
                                             </div>
                                         </div>
@@ -98,7 +124,6 @@ const Pager = () => {
                             })
                         }
 
-                        
                     </section>
                 )
             case 'TRASH':
@@ -125,8 +150,20 @@ const Pager = () => {
                                                         <span className='dot'></span>
                                                         <span className='dot'></span>
                                                     </div>
-                                                    <input type="checkbox" className="checkbox" checked={filterTrash.checked} onChange={ () => handleCheck(filterTrash.id) }/>
-                                                    <input type="text" value={filterTrash.item} className={`inputRead ${filterTrash.checked && 'textThrought'}`} />
+
+                                                    <input 
+                                                        type="checkbox" 
+                                                        className="checkbox" 
+                                                        checked={filterTrash.checked} 
+                                                        onChange={ () => handleCheck(filterTrash.id) }
+                                                    />
+
+                                                    <input 
+                                                        type="text" 
+                                                        value={filterTrash.item} 
+                                                        className={`inputRead ${filterTrash.checked && 'textThrought'}`} 
+                                                    />
+
                                                 </div>
                                             </div>                                
                                         </div>
@@ -136,14 +173,17 @@ const Pager = () => {
                         }
                         
                         <div className="trashMenu">
+
                             <button className="delete" onClick={deleteForever}>
                                 <img src={Trash} alt="" />
                                 <p>Delete Forever</p>
                             </button>
+
                             <button className="moveBack" onClick={moveBackToToDo}>
                                 <img src={Library} alt="" />
                                 <p>Move Back To To Do</p>
                             </button>
+
                         </div>
                     </section>
                 )
@@ -152,17 +192,25 @@ const Pager = () => {
         }
     };
 
-    
 
     function handleTextChange(e) {
         setToDoText(e.target.value)
     }
 
     const add = () => {
-        const newItem = { id: Date.now(), checked: false, item: toDoText, onlyTrash: false, toDoDone: true }
+        const newItem = { 
+            id: Date.now(), 
+            checked: false, 
+            item: toDoText, 
+            onlyTrash: false, 
+            toDoDone: true 
+        }
+
         const updateItems = [...items, newItem];
+
         setItems(updateItems)
         setToDoText('');
+        
         localStorage.setItem('todolist', JSON.stringify(updateItems))
     }
 
@@ -170,31 +218,53 @@ const Pager = () => {
         console.log(`key ${ id }`)
         const listItems = items.map(item => item.id === id ? { ...item, checked: !item.checked } : item)
         setItems(listItems)
+      
         localStorage.setItem('todolist', JSON.stringify(listItems))
     }
 
     const moveToTrash = () => {
         const checkedItems = items.filter(item => item.checked);
-    
-        const updateItems = items.map(item =>
-            checkedItems.find(checkedItem => checkedItem.id === item.id) ? { ...item, onlyTrash: true, toDoDone: false, checked: false } : item
+        const updateItemsOfTrash = items.map(item =>
+            checkedItems.find(checkedItem => checkedItem.id === item.id) 
+            ? { 
+                ...item, 
+                onlyTrash: true, 
+                toDoDone: false, 
+                checked: false 
+            } : item
         );
-        setItems(updateItems);
-        localStorage.setItem('todolist', JSON.stringify(updateItems))
+
+        setItems(updateItemsOfTrash);
+
+        localStorage.setItem('todolist', JSON.stringify(updateItemsOfTrash))
     }
 
     const moveBackToToDo = () => {
         const checkedItems = items.filter(item => item.checked);
         const updatedItems = items.map(item =>
-            checkedItems.find(checkedItem => checkedItem.id === item.id) ? {...item, checked: false, onlyTrash: false, toDoDone: true} : item
+            checkedItems.find(checkedItem => checkedItem.id === item.id) 
+            ? {
+                ...item, 
+                checked: false, 
+                onlyTrash: false, 
+                toDoDone: true
+            } : item
         )
+
         setItems(updatedItems);
     }
 
     const deleteForever = () => {
-        const checkedItems = items.filter(item => !item.checked);
+        const checkedItems = items.filter(item => !(item.checked && item.onlyTrash));
+
         setItems(checkedItems)
+
+        localStorage.setItem('todolist', JSON.stringify(checkedItems))
     }
+
+    const handleClose = () => {
+        setMenuVisible(false);
+    };
 
     return (
         <section className="pager">
@@ -229,15 +299,27 @@ const Pager = () => {
                 </div>
 
                 {isMenuVisible && (
-                <div className="inputTask">
-                    <div className="inputTaskWrapper">
-                        <h1>Add New To Do</h1>
-                        <textarea type="text" className='tasks' placeholder="Your text" value={toDoText} onChange={handleTextChange}/>
-                        <button className="add" onClick={add}>
-                            <span>Add</span>
-                        </button>
-                    </div>
-                </div>
+                    <ClickAwayListener onClickAway={handleClose}>
+                        <div className="inputTask">
+                            <div className="inputTaskWrapper">
+                                <h1>Add New To Do</h1>
+                                <textarea 
+                                    type="text" 
+                                    className='tasks' 
+                                    placeholder="Your text" 
+                                    value={toDoText} onChange={handleTextChange}
+                                />
+
+                                <button 
+                                    className="add" 
+                                    onClick={add}
+                                >
+                                    <span>Add</span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </ClickAwayListener>
                 )}
 
                 <div>
